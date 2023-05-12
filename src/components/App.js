@@ -28,7 +28,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [cardToDelete, setCardToDelete] = React.useState({});
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] =
     React.useState(false);
   const [isRegistered, setIsRegistered] = React.useState(false);
@@ -164,11 +164,10 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
-        <Header />
+        <Header loggedIn={isLoggedIn} />
         <Routes>
           <Route
             path="/"
-            loggedIn={isLoggedIn}
             element={
               <ProtectedRouteElement
                 loggedIn={isLoggedIn}
