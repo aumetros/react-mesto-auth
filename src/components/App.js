@@ -3,13 +3,14 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Main from "./Main";
 import ImagePopup from "./ImagePopup";
+import Login from "./Login";
 import { api } from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ConfirmDeletePopup from "./ConfirmDeletePopup";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
@@ -157,7 +158,8 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         <Header />
-        <Routes>
+        <Login />
+        {/* <Routes>
           <Route
             path="/"
             element={
@@ -179,17 +181,7 @@ function App() {
           />
           <Route path="/sign-up" element={Register} />
           <Route path="/sign-in" element={Login} />
-        </Routes>
-
-        {/* <Main
-          onEditAvatar={handleEditAvatarClick}
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onCardClick={handleCardClick}
-          onDeleteClick={handleDeleteClick}
-          onCardLike={handleCardLike}
-          initialCards={cards}
-        /> */}
+        </Routes> */}
         <Footer />
 
         <ImagePopup
