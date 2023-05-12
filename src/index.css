@@ -65,3 +65,7 @@
 @import url(./blocks/register/__input/register__input.css);
 @import url(./blocks/register/__button-submit/register__button-submit.css);
 @import url(./blocks/register/__link-login/register__link-login.css);
+
+@import url(./blocks/info-tooltip/__container/info-tooltip__container.css);
+@import url(./blocks/info-tooltip/__union/info-tooltip__union.css);
+@import url(./blocks/info-tooltip/__text/info-tooltip__text.css);

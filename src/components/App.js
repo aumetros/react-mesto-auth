@@ -11,7 +11,9 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ConfirmDeletePopup from "./ConfirmDeletePopup";
+import InfoTooltip from "./InfoTooltip";
 import { Routes, Route } from "react-router-dom";
+import { ProtectedRouteElement } from "./ProtectedRoute";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
@@ -27,6 +29,8 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [cardToDelete, setCardToDelete] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
+  const [isRegistered, setIsRegistered] = React.useState(false);
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -65,6 +69,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsConfirmDeletePopupOpen(false);
+    setIsInfoTooltipPopupOpen(false);
     setSelectedCard({});
   }
 
@@ -159,8 +164,6 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         <Header />
-        <Register />
-        {/* <Login /> */}
         {/* <Routes>
           <Route
             path="/"
@@ -181,8 +184,8 @@ function App() {
             }
             loggedIn={loggedIn}
           />
-          <Route path="/sign-up" element={Register} />
-          <Route path="/sign-in" element={Login} />
+          <Route path="/sign-up" element={<Register />} />
+          <Route path="/sign-in" element={<Login />} />
         </Routes> */}
         <Footer />
 
@@ -222,6 +225,13 @@ function App() {
           onConfirmDelete={handleCardDelete}
           isLoading={isLoading}
           onEsc={handleEscClose}
+        />
+
+        <InfoTooltip
+          isOpen={isInfoTooltipPopupOpen}
+          onClose={handleClosePopup}
+          onEsc={handleEscClose}
+          isRegistered={isRegistered}
         />
       </div>
     </CurrentUserContext.Provider>

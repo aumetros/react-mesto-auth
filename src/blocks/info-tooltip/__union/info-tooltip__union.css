@@ -1,0 +1,8 @@
+.info-tooltip__union {
+  width: 120px;
+  height: 120px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-bottom: 32px;
+}
