@@ -157,7 +157,6 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         <Header />
-
         <Routes>
           <Route
             path="/"
@@ -182,7 +181,7 @@ function App() {
           <Route path="/sign-in" element={Login} />
         </Routes>
 
-        <Main
+        {/* <Main
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
@@ -190,7 +189,7 @@ function App() {
           onDeleteClick={handleDeleteClick}
           onCardLike={handleCardLike}
           initialCards={cards}
-        />
+        /> */}
         <Footer />
 
         <ImagePopup
