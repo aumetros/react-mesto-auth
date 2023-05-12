@@ -3,15 +3,14 @@ function Login() {
     <section className="login">
       <form className="login__form" name="loginForm">
         <h2 className="login__title">Вход</h2>
-
         <input
           type="email"
           id="loginEmail"
           className="login__input"
           name="loginEmail"
           placeholder="Email"
-          value={""}
-          onChange={""}
+          // value={""}
+          // onChange={""}
         />
         <input
           type="password"
@@ -19,11 +18,10 @@ function Login() {
           className="login__input"
           name="loginPassword"
           placeholder="Пароль"
-          value={""}
-          onChange={""}
+          // value={""}
+          // onChange={""}
         />
-
-        <button className="login__submit-button" type="submit">
+        <button className="login__button-submit" type="submit">
           Войти
         </button>
       </form>
