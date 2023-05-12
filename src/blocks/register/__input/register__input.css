@@ -1,4 +1,4 @@
-.login__input {
+.register__input {
   background-color: #000000;
   padding: 0 0 7px;
   border-width: 0 0 2px;
@@ -10,13 +10,13 @@
   line-height: 17px;
 }
 
-.login__input::placeholder {
+.register__input::placeholder {
   color: #CCCCCC;
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
 }
 
-.login__input:last-of-type {
+.register__input:last-of-type {
   margin-bottom: 0;
 }

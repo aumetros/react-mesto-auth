@@ -4,6 +4,7 @@ import Header from "./Header";
 import Main from "./Main";
 import ImagePopup from "./ImagePopup";
 import Login from "./Login";
+import Register from "./Register";
 import { api } from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
@@ -158,7 +159,8 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         <Header />
-        <Login />
+        <Register />
+        {/* <Login /> */}
         {/* <Routes>
           <Route
             path="/"
