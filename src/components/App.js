@@ -13,7 +13,7 @@ import AddPlacePopup from "./AddPlacePopup";
 import ConfirmDeletePopup from "./ConfirmDeletePopup";
 import InfoTooltip from "./InfoTooltip";
 import { Routes, Route } from "react-router-dom";
-import { ProtectedRouteElement } from "./ProtectedRoute";
+import ProtectedRouteElement from "./ProtectedRoute";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
@@ -28,8 +28,9 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [cardToDelete, setCardToDelete] = React.useState({});
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] =
+    React.useState(false);
   const [isRegistered, setIsRegistered] = React.useState(false);
 
   React.useEffect(() => {
@@ -164,30 +165,29 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         <Header />
-        {/* <Routes>
+        <Routes>
           <Route
             path="/"
+            loggedIn={isLoggedIn}
             element={
               <ProtectedRouteElement
-                element={
-                  <Main
-                    onEditAvatar={handleEditAvatarClick}
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onCardClick={handleCardClick}
-                    onDeleteClick={handleDeleteClick}
-                    onCardLike={handleCardLike}
-                    initialCards={cards}
-                  />
-                }
+                loggedIn={isLoggedIn}
+                element={Main}
+                onEditAvatar={handleEditAvatarClick}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onCardClick={handleCardClick}
+                onDeleteClick={handleDeleteClick}
+                onCardLike={handleCardLike}
+                initialCards={cards}
               />
             }
-            loggedIn={loggedIn}
           />
           <Route path="/sign-up" element={<Register />} />
           <Route path="/sign-in" element={<Login />} />
-        </Routes> */}
-        <Footer />
+        </Routes>
+
+        {isLoggedIn && <Footer />}
 
         <ImagePopup
           card={selectedCard}
