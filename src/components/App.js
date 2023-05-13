@@ -17,15 +17,11 @@ import ProtectedRouteElement from "./ProtectedRoute";
 import * as auth from "../utils/auth.js";
 
 function App() {
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    React.useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] =
-    React.useState(false);
-  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] =
-    React.useState(false);
+  const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
@@ -165,26 +161,26 @@ function App() {
   }
 
   function handleInfoPopupClose(e) {
-    if (isLoggedIn) {
-      handleClosePopup(e);
-      navigate("/", { replace: true });
-      return;
-    }
     if (isRegistered) {
       handleClosePopup(e);
       navigate("/sign-in", { replace: true });
+      setTimeout(() => {
+        setIsRegistered(false);
+      }, 500);
+    } else {
+      handleClosePopup(e);
     }
   }
 
   function handleInfoEscClose(e) {
-    if (isLoggedIn) {
-      handleEscClose(e);
-      navigate("/", { replace: true });
-      return;
-    }
     if (isRegistered) {
       handleEscClose(e);
       navigate("/sign-in", { replace: true });
+      setTimeout(() => {
+        setIsRegistered(false);
+      }, 500);
+    } else {
+      handleEscClose(e);
     }
   }
 
@@ -204,9 +200,9 @@ function App() {
       if (res.token) {
         setIsLoggedIn(true);
         localStorage.setItem("jwt", res.token);
-        setIsInfoTooltipPopupOpen(true);
       } else {
-        console.log(res.error);
+        setIsInfoTooltipPopupOpen(true);
+        console.log(res);
       }
     });
   }
@@ -294,7 +290,6 @@ function App() {
           onClose={handleInfoPopupClose}
           onEsc={handleInfoEscClose}
           isRegistered={isRegistered}
-          isLoggedIn={isLoggedIn}
         />
       </div>
     </CurrentUserContext.Provider>

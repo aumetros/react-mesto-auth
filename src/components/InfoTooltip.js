@@ -2,7 +2,7 @@ import React from "react";
 import unionDonePath from "../images/union-done.svg";
 import unionErrPath from "../images/union-err.svg";
 
-function InfoTooltip({ isOpen, onClose, onEsc, isRegistered, isLoggedIn }) {
+function InfoTooltip({ isOpen, onClose, onEsc, isRegistered }) {
   React.useEffect(() => {
     if (isOpen) {
       document.addEventListener("keydown", onEsc);
@@ -19,8 +19,9 @@ function InfoTooltip({ isOpen, onClose, onEsc, isRegistered, isLoggedIn }) {
         <div
           className="info-tooltip__union"
           style={
-            (isRegistered && { backgroundImage: `url(${unionDonePath})` }) ||
-            (!isLoggedIn && { backgroundImage: `url(${unionErrPath})` })
+            isRegistered
+              ? { backgroundImage: `url(${unionDonePath})` }
+              : { backgroundImage: `url(${unionErrPath})` }
           }
         ></div>
 
