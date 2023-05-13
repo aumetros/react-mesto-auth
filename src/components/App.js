@@ -14,6 +14,7 @@ import ConfirmDeletePopup from "./ConfirmDeletePopup";
 import InfoTooltip from "./InfoTooltip";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRouteElement from "./ProtectedRoute";
+import * as auth from '../utils/auth.js'
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
