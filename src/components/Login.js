@@ -1,8 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "../hooks/useForm";
 
-function Login({loggedIn}) {
-
+function Login({loggedIn, onLogin}) {
+  const { values, handleChange} = useForm();
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -11,9 +12,14 @@ function Login({loggedIn}) {
     }
   }, [loggedIn, navigate])
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    onLogin(values.loginEmail, values.loginPassword);
+  }
+
   return (
     <section className="login">
-      <form className="login__form" name="loginForm">
+      <form className="login__form" name="loginForm" onSubmit={handleSubmit}>
         <h2 className="login__title">Вход</h2>
         <input
           type="email"
@@ -21,8 +27,8 @@ function Login({loggedIn}) {
           className="login__input"
           name="loginEmail"
           placeholder="Email"
-          // value={""}
-          // onChange={""}
+          value={values.loginEmail || ''}
+          onChange={handleChange}
         />
         <input
           type="password"
@@ -30,8 +36,8 @@ function Login({loggedIn}) {
           className="login__input"
           name="loginPassword"
           placeholder="Пароль"
-          // value={""}
-          // onChange={""}
+          value={values.loginPassword || ''}
+          onChange={handleChange}
         />
         <button className="login__button-submit" type="submit">
           Войти

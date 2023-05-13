@@ -164,21 +164,27 @@ function App() {
       });
   }
 
-  function handleInfoTooltipPopupClose(e) {
+  function handleInfoPopupClose(e) {
+    if (isLoggedIn) {
+      handleClosePopup(e);
+      navigate("/", { replace: true });
+      return;
+    }
     if (isRegistered) {
       handleClosePopup(e);
       navigate("/sign-in", { replace: true });
-    } else {
-      handleClosePopup(e);
     }
   }
 
-  function handleInfoTooltipEscClose(evt) {
-    if (evt.key === "Escape" && isRegistered) {
-      closeAllPopups();
+  function handleInfoEscClose(e) {
+    if (isLoggedIn) {
+      handleEscClose(e);
+      navigate("/", { replace: true });
+      return;
+    }
+    if (isRegistered) {
+      handleEscClose(e);
       navigate("/sign-in", { replace: true });
-    } else if (evt.key === "Escape" && !isRegistered) {
-      closeAllPopups();
     }
   }
 
@@ -187,12 +193,22 @@ function App() {
       if (res.data) {
         setIsRegistered(true);
         setIsInfoTooltipPopupOpen(true);
-        console.log(res)
       } else {
-        setIsInfoTooltipPopupOpen(true);
-        console.log(res)
+        console.log(res.error);
       }
-    })
+    });
+  }
+
+  function handleLoginSubmit(email, password) {
+    auth.autorize(email, password).then((res) => {
+      if (res.token) {
+        setIsLoggedIn(true);
+        localStorage.setItem("jwt", res.token);
+        setIsInfoTooltipPopupOpen(true);
+      } else {
+        console.log(res.error);
+      }
+    });
   }
 
   return (
@@ -225,7 +241,12 @@ function App() {
               />
             }
           />
-          <Route path="/sign-in" element={<Login loggedIn={isLoggedIn} />} />
+          <Route
+            path="/sign-in"
+            element={
+              <Login loggedIn={isLoggedIn} onLogin={handleLoginSubmit} />
+            }
+          />
         </Routes>
 
         {isLoggedIn && <Footer />}
@@ -270,9 +291,10 @@ function App() {
 
         <InfoTooltip
           isOpen={isInfoTooltipPopupOpen}
-          onClose={handleInfoTooltipPopupClose}
-          onEsc={handleInfoTooltipEscClose}
+          onClose={handleInfoPopupClose}
+          onEsc={handleInfoEscClose}
           isRegistered={isRegistered}
+          isLoggedIn={isLoggedIn}
         />
       </div>
     </CurrentUserContext.Provider>
