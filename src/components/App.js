@@ -12,23 +12,29 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ConfirmDeletePopup from "./ConfirmDeletePopup";
 import InfoTooltip from "./InfoTooltip";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import ProtectedRouteElement from "./ProtectedRoute";
-import * as auth from '../utils/auth.js'
+import * as auth from "../utils/auth.js";
 
 function App() {
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
-  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
+  const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] =
+    React.useState(false);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] =
+    React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [cardToDelete, setCardToDelete] = React.useState({});
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);  
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isRegistered, setIsRegistered] = React.useState(false);
+
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -158,6 +164,37 @@ function App() {
       });
   }
 
+  function handleInfoTooltipPopupClose(e) {
+    if (isRegistered) {
+      handleClosePopup(e);
+      navigate("/sign-in", { replace: true });
+    } else {
+      handleClosePopup(e);
+    }
+  }
+
+  function handleInfoTooltipEscClose(evt) {
+    if (evt.key === "Escape" && isRegistered) {
+      closeAllPopups();
+      navigate("/sign-in", { replace: true });
+    } else if (evt.key === "Escape" && !isRegistered) {
+      closeAllPopups();
+    }
+  }
+
+  function handleRegisterSubmit(email, password) {
+    auth.register(email, password).then((res) => {
+      if (res.data) {
+        setIsRegistered(true);
+        setIsInfoTooltipPopupOpen(true);
+        console.log(res)
+      } else {
+        setIsInfoTooltipPopupOpen(true);
+        console.log(res)
+      }
+    })
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
@@ -179,7 +216,15 @@ function App() {
               />
             }
           />
-          <Route path="/sign-up" element={<Register loggedIn={isLoggedIn} />} />
+          <Route
+            path="/sign-up"
+            element={
+              <Register
+                loggedIn={isLoggedIn}
+                onRegister={handleRegisterSubmit}
+              />
+            }
+          />
           <Route path="/sign-in" element={<Login loggedIn={isLoggedIn} />} />
         </Routes>
 
@@ -225,8 +270,8 @@ function App() {
 
         <InfoTooltip
           isOpen={isInfoTooltipPopupOpen}
-          onClose={handleClosePopup}
-          onEsc={handleEscClose}
+          onClose={handleInfoTooltipPopupClose}
+          onEsc={handleInfoTooltipEscClose}
           isRegistered={isRegistered}
         />
       </div>

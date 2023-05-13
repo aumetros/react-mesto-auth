@@ -3,6 +3,7 @@ import unionDonePath from "../images/union-done.svg";
 import unionErrPath from "../images/union-err.svg";
 
 function InfoTooltip({ isOpen, onClose, onEsc, isRegistered }) {
+
   React.useEffect(() => {
     if (isOpen) {
       document.addEventListener("keydown", onEsc);

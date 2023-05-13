@@ -2,11 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import { useForm } from "../hooks/useForm";
 
-
-function Register({ loggedIn }) {
+function Register({ loggedIn, onRegister }) {
   const navigate = useNavigate();
-  const { values, handleChange, setValues } = useForm();
-  
+  const { values, handleChange} = useForm();
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -16,15 +14,16 @@ function Register({ loggedIn }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    
-
-    console.log(values)
-
+    onRegister(values.registerEmail, values.registerPassword);
   }
 
   return (
     <section className="register">
-      <form className="register__form" name="registerForm" onSubmit={handleSubmit} >
+      <form
+        className="register__form"
+        name="registerForm"
+        onSubmit={handleSubmit}
+      >
         <h2 className="register__title">Регистрация</h2>
         <input
           type="email"
@@ -32,8 +31,9 @@ function Register({ loggedIn }) {
           className="register__input"
           name="registerEmail"
           placeholder="Email"
-          value={values.registerEmail || ''}
+          value={values.registerEmail || ""}
           onChange={handleChange}
+          required
         />
         <input
           type="password"
@@ -41,8 +41,9 @@ function Register({ loggedIn }) {
           className="register__input"
           name="registerPassword"
           placeholder="Пароль"
-          value={values.registerPassword || ''}
+          value={values.registerPassword || ""}
           onChange={handleChange}
+          required
         />
         <button className="register__button-submit" type="submit">
           Зарегистрироваться
