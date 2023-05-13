@@ -48,14 +48,9 @@ function App() {
       });
   }, []);
 
-  React.useEffect(() => {
-    handleCheckToken();
-  }, []);
-
-  function handleCheckToken() {
+  const handleCheckToken = React.useCallback(() => {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
-
       auth.checkToken(jwt).then((res) => {
         setUserEmail(res.data.email);
         if (res) {
@@ -64,7 +59,11 @@ function App() {
         }
       });
     }
-  }
+  }, [navigate]);
+
+  React.useEffect(() => {
+    handleCheckToken();
+  }, [handleCheckToken]);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
@@ -222,7 +221,9 @@ function App() {
     auth.autorize(email, password).then((res) => {
       if (res.token) {
         setIsLoggedIn(true);
+        setUserEmail(email);
         localStorage.setItem("jwt", res.token);
+        navigate("/", { replace: true });
       } else {
         setIsInfoTooltipPopupOpen(true);
         console.log(res);
@@ -239,7 +240,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
-        <Header loggedIn={isLoggedIn} userEmail={userEmail} signOut={signOut}/>
+        <Header loggedIn={isLoggedIn} userEmail={userEmail} signOut={signOut} />
         <Routes>
           <Route
             path="/"
