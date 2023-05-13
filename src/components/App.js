@@ -17,11 +17,15 @@ import ProtectedRouteElement from "./ProtectedRoute";
 import * as auth from "../utils/auth.js";
 
 function App() {
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
-  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
+  const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] =
+    React.useState(false);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] =
+    React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
@@ -29,6 +33,7 @@ function App() {
   const [cardToDelete, setCardToDelete] = React.useState({});
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isRegistered, setIsRegistered] = React.useState(false);
+  const [userEmail, setUserEmail] = React.useState("");
 
   const navigate = useNavigate();
 
@@ -42,6 +47,24 @@ function App() {
         console.log(err);
       });
   }, []);
+
+  React.useEffect(() => {
+    handleCheckToken();
+  }, []);
+
+  function handleCheckToken() {
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");
+
+      auth.checkToken(jwt).then((res) => {
+        setUserEmail(res.data.email);
+        if (res) {
+          setIsLoggedIn(true);
+          navigate("/", { replace: true });
+        }
+      });
+    }
+  }
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
@@ -207,10 +230,16 @@ function App() {
     });
   }
 
+  function signOut() {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    navigate("/sign-in", { replace: true });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
-        <Header loggedIn={isLoggedIn} />
+        <Header loggedIn={isLoggedIn} userEmail={userEmail} signOut={signOut}/>
         <Routes>
           <Route
             path="/"

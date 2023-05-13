@@ -2,13 +2,14 @@ import React from "react";
 import logoPath from "../images/mesto-logo.svg";
 import { NavLink } from "react-router-dom";
 
-function Header({ loggedIn }) {
+function Header({ loggedIn, userEmail, signOut }) {
+
   function handleNavBar() {
     if (loggedIn) {
       return (
         <nav className="header__menu">
-          <span className="header__user">email@mail.com</span>
-          <span className="header__button-exit">Выйти</span>
+          <span className="header__user">{userEmail}</span>
+          <span className="header__button-exit" onClick={signOut}>Выйти</span>
         </nav>
       );
     } else {
