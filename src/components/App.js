@@ -16,21 +16,17 @@ import { Routes, Route } from "react-router-dom";
 import ProtectedRouteElement from "./ProtectedRoute";
 
 function App() {
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    React.useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] =
-    React.useState(false);
+  const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [cardToDelete, setCardToDelete] = React.useState({});
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
-  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] =
-    React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);  
   const [isRegistered, setIsRegistered] = React.useState(false);
 
   React.useEffect(() => {
@@ -182,8 +178,8 @@ function App() {
               />
             }
           />
-          <Route path="/sign-up" element={<Register />} />
-          <Route path="/sign-in" element={<Login />} />
+          <Route path="/sign-up" element={<Register loggedIn={isLoggedIn} />} />
+          <Route path="/sign-in" element={<Login loggedIn={isLoggedIn} />} />
         </Routes>
 
         {isLoggedIn && <Footer />}

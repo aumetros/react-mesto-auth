@@ -1,6 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import React from "react";
 
-function Register() {
+function Register({ loggedIn }) {
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      navigate("/", { replace: true });
+    }
+  }, [loggedIn, navigate]);
+
   return (
     <section className="register">
       <form className="register__form" name="registerForm">

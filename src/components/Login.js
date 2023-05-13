@@ -1,4 +1,16 @@
-function Login() {
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+function Login({loggedIn}) {
+
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      navigate("/", { replace: true });
+    }
+  }, [loggedIn, navigate])
+
   return (
     <section className="login">
       <form className="login__form" name="loginForm">
