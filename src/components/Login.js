@@ -15,7 +15,7 @@ function Login({ loggedIn, onLogin }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onLogin(values.loginEmail, values.loginPassword);
+    onLogin(values.authEmail, values.authPassword);
   }
 
   return (
@@ -23,37 +23,10 @@ function Login({ loggedIn, onLogin }) {
       value={values}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
-      title={'Вход'}
+      title={"Вход"}
       buttonText={"Войти"}
       linkText={""}
     />
-
-    // <section className="login">
-    //   <form className="login__form" name="loginForm" onSubmit={handleSubmit}>
-    //     <h2 className="login__title">Вход</h2>
-    //     <input
-    //       type="email"
-    //       id="loginEmail"
-    //       className="login__input"
-    //       name="loginEmail"
-    //       placeholder="Email"
-    //       value={values.loginEmail || ''}
-    //       onChange={handleChange}
-    //     />
-    //     <input
-    //       type="password"
-    //       id="loginPassword"
-    //       className="login__input"
-    //       name="loginPassword"
-    //       placeholder="Пароль"
-    //       value={values.loginPassword || ''}
-    //       onChange={handleChange}
-    //     />
-    //     <button className="login__button-submit" type="submit">
-    //       Войти
-    //     </button>
-    //   </form>
-    // </section>
   );
 }
 
