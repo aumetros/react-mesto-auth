@@ -1,16 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../hooks/useForm";
+import AuthForm from "./AuthForm";
 
-function Login({loggedIn, onLogin}) {
-  const { values, handleChange} = useForm();
+function Login({ loggedIn, onLogin }) {
+  const { values, handleChange } = useForm();
   const navigate = useNavigate();
 
   React.useEffect(() => {
     if (loggedIn) {
       navigate("/", { replace: true });
     }
-  }, [loggedIn, navigate])
+  }, [loggedIn, navigate]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -18,32 +19,41 @@ function Login({loggedIn, onLogin}) {
   }
 
   return (
-    <section className="login">
-      <form className="login__form" name="loginForm" onSubmit={handleSubmit}>
-        <h2 className="login__title">Вход</h2>
-        <input
-          type="email"
-          id="loginEmail"
-          className="login__input"
-          name="loginEmail"
-          placeholder="Email"
-          value={values.loginEmail || ''}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          id="loginPassword"
-          className="login__input"
-          name="loginPassword"
-          placeholder="Пароль"
-          value={values.loginPassword || ''}
-          onChange={handleChange}
-        />
-        <button className="login__button-submit" type="submit">
-          Войти
-        </button>
-      </form>
-    </section>
+    <AuthForm
+      value={values}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      title={'Вход'}
+      buttonText={"Войти"}
+      linkText={""}
+    />
+
+    // <section className="login">
+    //   <form className="login__form" name="loginForm" onSubmit={handleSubmit}>
+    //     <h2 className="login__title">Вход</h2>
+    //     <input
+    //       type="email"
+    //       id="loginEmail"
+    //       className="login__input"
+    //       name="loginEmail"
+    //       placeholder="Email"
+    //       value={values.loginEmail || ''}
+    //       onChange={handleChange}
+    //     />
+    //     <input
+    //       type="password"
+    //       id="loginPassword"
+    //       className="login__input"
+    //       name="loginPassword"
+    //       placeholder="Пароль"
+    //       value={values.loginPassword || ''}
+    //       onChange={handleChange}
+    //     />
+    //     <button className="login__button-submit" type="submit">
+    //       Войти
+    //     </button>
+    //   </form>
+    // </section>
   );
 }
 
