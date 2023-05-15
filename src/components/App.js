@@ -140,10 +140,12 @@ function App() {
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== cardToDelete._id));
         closeAllPopups();
-        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
@@ -154,10 +156,12 @@ function App() {
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
-        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
@@ -168,10 +172,12 @@ function App() {
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
-        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
@@ -182,10 +188,12 @@ function App() {
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
-        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
