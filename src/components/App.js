@@ -33,7 +33,9 @@ function App() {
   const [cardToDelete, setCardToDelete] = React.useState({});
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isRegistered, setIsRegistered] = React.useState(false);
+  const [isInvalidLogin, setIsInvalidLogin] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState("");
 
   const navigate = useNavigate();
 
@@ -51,13 +53,18 @@ function App() {
   const handleCheckToken = React.useCallback(() => {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
-      auth.checkToken(jwt).then((res) => {
-        setUserEmail(res.data.email);
-        if (res) {
-          setIsLoggedIn(true);
-          navigate("/", { replace: true });
-        }
-      });
+      auth
+        .checkToken(jwt)
+        .then((res) => {
+          if (res) {
+            setUserEmail(res.data.email);
+            setIsLoggedIn(true);
+            navigate("/", { replace: true });
+          }
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
     }
   }, [navigate]);
 
@@ -191,6 +198,10 @@ function App() {
       }, 500);
     } else {
       handleClosePopup(e);
+      setTimeout(() => {
+        setIsInvalidLogin(false);
+        setErrorMessage(null);
+      }, 500);
     }
   }
 
@@ -203,32 +214,46 @@ function App() {
       }, 500);
     } else {
       handleEscClose(e);
+      setTimeout(() => {
+        setIsInvalidLogin(false);
+        setErrorMessage(null);
+      }, 500);
     }
   }
 
   function handleRegisterSubmit(email, password) {
-    auth.register(email, password).then((res) => {
-      if (res.data) {
-        setIsRegistered(true);
+    auth
+      .register(email, password)
+      .then((res) => {
+        if (res.data) {
+          setIsRegistered(true);
+          setIsInfoTooltipPopupOpen(true);
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+        setErrorMessage(err);
         setIsInfoTooltipPopupOpen(true);
-      } else {
-        console.log(res.error);
-      }
-    });
+      });
   }
 
   function handleLoginSubmit(email, password) {
-    auth.autorize(email, password).then((res) => {
-      if (res.token) {
-        setIsLoggedIn(true);
-        setUserEmail(email);
-        localStorage.setItem("jwt", res.token);
-        navigate("/", { replace: true });
-      } else {
+    auth
+      .autorize(email, password)
+      .then((res) => {
+        if (res.token) {
+          setIsLoggedIn(true);
+          setUserEmail(email);
+          localStorage.setItem("jwt", res.token);
+          navigate("/", { replace: true });
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+        setIsInvalidLogin(true);
+        setErrorMessage(err);
         setIsInfoTooltipPopupOpen(true);
-        console.log(res);
-      }
-    });
+      });
   }
 
   function signOut() {
@@ -320,6 +345,8 @@ function App() {
           onClose={handleInfoPopupClose}
           onEsc={handleInfoEscClose}
           isRegistered={isRegistered}
+          onError={errorMessage}
+          onInvalidLogin={isInvalidLogin}
         />
       </div>
     </CurrentUserContext.Provider>

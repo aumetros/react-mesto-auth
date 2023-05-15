@@ -10,14 +10,7 @@ export const register = (email, password) => {
       password: password,
       email: email,
     }),
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => console.log(err));
+  }).then((res) => checkResponse(res));
 };
 
 export const autorize = (email, password) => {
@@ -30,14 +23,7 @@ export const autorize = (email, password) => {
       password: password,
       email: email,
     }),
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => console.log(err));
+  }).then((res) => checkResponse(res));
 };
 
 export const checkToken = (token) => {
@@ -47,12 +33,12 @@ export const checkToken = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => console.log(err));
+  }).then((res) => checkResponse(res));
 };
+
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(res.status);
+}

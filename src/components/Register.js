@@ -23,6 +23,7 @@ function Register({ loggedIn, onRegister }) {
         className="register__form"
         name="registerForm"
         onSubmit={handleSubmit}
+        noValidate
       >
         <h2 className="register__title">Регистрация</h2>
         <input
@@ -33,7 +34,6 @@ function Register({ loggedIn, onRegister }) {
           placeholder="Email"
           value={values.registerEmail || ""}
           onChange={handleChange}
-          required
         />
         <input
           type="password"
@@ -43,7 +43,6 @@ function Register({ loggedIn, onRegister }) {
           placeholder="Пароль"
           value={values.registerPassword || ""}
           onChange={handleChange}
-          required
         />
         <button className="register__button-submit" type="submit">
           Зарегистрироваться
