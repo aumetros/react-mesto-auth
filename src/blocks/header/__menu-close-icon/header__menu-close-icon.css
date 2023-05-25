@@ -1,0 +1,21 @@
+.header__menu-close-icon {
+  display: none;
+  min-width: 20px;
+  min-height: 20px;
+  margin-right: 30px;
+  background-image: url('./../../../images/close-image.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.header__menu-close-icon:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 440px) {
+  .header__menu-close-icon {
+    display: block;
+  }
+}

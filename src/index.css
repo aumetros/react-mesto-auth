@@ -14,6 +14,8 @@
 @import url(./blocks/header/__button-exit/header__button-exit.css);
 @import url(./blocks/header/__menu-item/header__menu-item.css);
 @import url(./blocks/header/__menu-item/_active/header__menu-item_active.css);
+@import url(./blocks/header/__menu-icon/header__menu-icon.css);
+@import url(./blocks/header/__menu-close-icon/header__menu-close-icon.css);
 
 @import url(./blocks/profile/profile.css);
 @import url(./blocks/profile/__info/profile__info.css);

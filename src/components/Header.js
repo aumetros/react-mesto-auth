@@ -10,6 +10,8 @@ function Header({ loggedIn, userEmail, signOut }) {
         <nav className="header__menu">
           <span className="header__user">{userEmail}</span>
           <span className="header__button-exit" onClick={signOut}>Выйти</span>
+          <span className="header__menu-icon"></span>
+          <span className="header__menu-close-icon"></span>
         </nav>
       );
     } else {
