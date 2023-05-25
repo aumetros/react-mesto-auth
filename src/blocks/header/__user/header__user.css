@@ -6,9 +6,3 @@
   color: #FFFFFF;
   margin-right: 24px;
 }
-
-@media screen and (max-width: 440px) {
-  .header__user {
-    display: none;
-  }
-}

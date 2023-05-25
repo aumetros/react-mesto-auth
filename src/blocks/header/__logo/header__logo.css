@@ -2,8 +2,7 @@
   display: block;
   width: 142px;
   height: 33px;
-  object-fit: contain;
-  padding-bottom: 41px;
+  object-fit: contain;  
 }
 
 @media screen and (max-width: 320px) {

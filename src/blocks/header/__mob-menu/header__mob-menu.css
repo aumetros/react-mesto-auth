@@ -1,0 +1,13 @@
+.header__mob-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px;
+}
+
+@media screen and (max-width: 440px) {
+  .header__mob-menu {
+    display: flex;
+  }
+}

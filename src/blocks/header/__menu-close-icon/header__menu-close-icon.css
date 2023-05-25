@@ -1,5 +1,5 @@
 .header__menu-close-icon {
-  display: none;
+  display: block;
   min-width: 20px;
   min-height: 20px;
   margin-right: 30px;
@@ -12,10 +12,4 @@
 
 .header__menu-close-icon:hover {
   opacity: 0.6;
-}
-
-@media screen and (max-width: 440px) {
-  .header__menu-close-icon {
-    display: block;
-  }
 }
