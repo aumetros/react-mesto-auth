@@ -36,6 +36,7 @@ function App() {
   const [isInvalidLogin, setIsInvalidLogin] = React.useState(false);
   const [userEmail, setUserEmail] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
+  const [isMobMenuOpen, setIsMobMenuOpen] = React.useState(false);
 
   const navigate = useNavigate();
 
@@ -270,10 +271,19 @@ function App() {
     navigate("/sign-in", { replace: true });
   }
 
+  function handleOpenMobMenu() {
+    setIsMobMenuOpen(!isMobMenuOpen);
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="app">
-        <Header loggedIn={isLoggedIn} userEmail={userEmail} signOut={signOut} />
+      <div className={`app ${isMobMenuOpen && "app_show-mob-menu"}`}>
+        <Header
+          loggedIn={isLoggedIn}
+          userEmail={userEmail}
+          signOut={signOut}
+          onOpenMenu={handleOpenMobMenu}
+        />
         <Routes>
           <Route
             path="/"

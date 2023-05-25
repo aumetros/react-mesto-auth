@@ -2,7 +2,15 @@ import React from "react";
 import logoPath from "../images/mesto-logo.svg";
 import { NavLink } from "react-router-dom";
 
-function Header({ loggedIn, userEmail, signOut }) {
+function Header({ loggedIn, userEmail, signOut, onOpenMenu }) {
+
+const [isMenuCliked, setIsMenuClicked] = React.useState(false);
+
+function toggleMenu() {
+  setIsMenuClicked(!isMenuCliked);
+  onOpenMenu();
+}
+
   function handleNavBar() {
     if (loggedIn) {
       return (
@@ -14,8 +22,8 @@ function Header({ loggedIn, userEmail, signOut }) {
             </span>
           </div>
           <div className="header__mob-menu-icons">
-            <span className="header__menu-icon"></span>
-            <span className="header__menu-close-icon"></span>
+            {!isMenuCliked && <span className="header__menu-icon" onClick={toggleMenu}></span>}
+            {isMenuCliked && <span className="header__menu-close-icon" onClick={toggleMenu}></span>}            
           </div>
         </nav>
       );
