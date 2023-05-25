@@ -6,3 +6,9 @@
   -webkit-font-smoothing:antialiased;
   background-color: #000000;
 }
+
+@media screen and (max-width: 440px) {
+  .app {
+    transform: translateY(-143px);
+  }
+}
