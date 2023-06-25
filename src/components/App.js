@@ -268,6 +268,7 @@ function App() {
   function signOut() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
+    setIsMobMenuOpen(false);
     navigate("/sign-in", { replace: true });
   }
 

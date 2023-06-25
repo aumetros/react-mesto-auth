@@ -10,3 +10,9 @@
 .header__button-exit:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 440px) {
+  .header__button-exit {
+    display: none;
+  }
+}
