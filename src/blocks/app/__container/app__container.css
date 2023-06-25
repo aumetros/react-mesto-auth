@@ -5,6 +5,6 @@
 
 @media screen and (max-width: 920px) {
   .app__container {
-    padding: 0 15px 0;
+    /* padding: 0 15px 0; */
   }
 }
