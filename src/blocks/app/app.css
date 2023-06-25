@@ -5,6 +5,4 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   background-color: #000000;
-  transform: translateY(-143px);
-  transition: all 0.25s linear;
 }

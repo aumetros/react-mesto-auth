@@ -1,0 +1,4 @@
+.app__container {
+  transform: translateY(-143px);
+  transition: transform 0.25s linear;
+}

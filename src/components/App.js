@@ -278,47 +278,49 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className={`app ${isMobMenuOpen && "app_show-mob-menu"}`}>
-        <Header
-          loggedIn={isLoggedIn}
-          userEmail={userEmail}
-          signOut={signOut}
-          onOpenMenu={handleOpenMobMenu}
-        />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRouteElement
-                loggedIn={isLoggedIn}
-                element={Main}
-                onEditAvatar={handleEditAvatarClick}
-                onEditProfile={handleEditProfileClick}
-                onAddPlace={handleAddPlaceClick}
-                onCardClick={handleCardClick}
-                onDeleteClick={handleDeleteClick}
-                onCardLike={handleCardLike}
-                initialCards={cards}
-              />
-            }
+        <div className={`app__container ${isMobMenuOpen && "app__container_show-menu"}`}>
+          <Header
+            loggedIn={isLoggedIn}
+            userEmail={userEmail}
+            signOut={signOut}
+            onOpenMenu={handleOpenMobMenu}
           />
-          <Route
-            path="/sign-up"
-            element={
-              <Register
-                loggedIn={isLoggedIn}
-                onRegister={handleRegisterSubmit}
-              />
-            }
-          />
-          <Route
-            path="/sign-in"
-            element={
-              <Login loggedIn={isLoggedIn} onLogin={handleLoginSubmit} />
-            }
-          />
-        </Routes>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <ProtectedRouteElement
+                  loggedIn={isLoggedIn}
+                  element={Main}
+                  onEditAvatar={handleEditAvatarClick}
+                  onEditProfile={handleEditProfileClick}
+                  onAddPlace={handleAddPlaceClick}
+                  onCardClick={handleCardClick}
+                  onDeleteClick={handleDeleteClick}
+                  onCardLike={handleCardLike}
+                  initialCards={cards}
+                />
+              }
+            />
+            <Route
+              path="/sign-up"
+              element={
+                <Register
+                  loggedIn={isLoggedIn}
+                  onRegister={handleRegisterSubmit}
+                />
+              }
+            />
+            <Route
+              path="/sign-in"
+              element={
+                <Login loggedIn={isLoggedIn} onLogin={handleLoginSubmit} />
+              }
+            />
+          </Routes>
 
-        {isLoggedIn && <Footer />}
+          {isLoggedIn && <Footer />}
+        </div>
 
         <ImagePopup
           card={selectedCard}

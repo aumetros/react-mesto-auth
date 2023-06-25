@@ -5,7 +5,8 @@
 @import url(./blocks/body/body.css);
 
 @import url(./blocks/app/app.css);
-@import url(./blocks/app/_show-mob-menu/app_show-mob-menu.css);
+@import url(./blocks/app/__container/app__container.css);
+@import url(./blocks/app/__container/_show-menu/app__container_show-menu.css);
 
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/header__logo.css);
