@@ -277,7 +277,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className={`app ${isMobMenuOpen && "app_show-mob-menu"}`}>
+      <div className="app">
         <div className={`app__container ${isMobMenuOpen && "app__container_show-menu"}`}>
           <Header
             loggedIn={isLoggedIn}

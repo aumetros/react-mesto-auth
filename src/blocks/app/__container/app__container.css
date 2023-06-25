@@ -2,3 +2,9 @@
   transform: translateY(-143px);
   transition: transform 0.25s linear;
 }
+
+@media screen and (max-width: 920px) {
+  .app__container {
+    padding: 0 15px 0;
+  }
+}
