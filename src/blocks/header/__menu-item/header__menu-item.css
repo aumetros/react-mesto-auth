@@ -11,3 +11,11 @@
 .header__menu-item:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 400px) {
+  .header__menu-item {
+    font-size: 14px;
+    margin-top: 7px;
+    margin-right: 15px;
+  }
+}

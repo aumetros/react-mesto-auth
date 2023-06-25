@@ -11,8 +11,20 @@
   font-weight: 400;
   line-height: 22px;
   cursor: pointer;
+  text-align: center;
 }
 
 .auth__button-submit:hover {
   opacity: 0.85;;
+}
+
+@media screen and (max-width: 400px) {
+  .auth__button-submit {
+    font-size: 16px;
+    line-height: 18px;
+    min-width: 260px;
+    min-height: 46px;
+    padding: 14px 35px;
+    margin-top: 174px;
+  }
 }
